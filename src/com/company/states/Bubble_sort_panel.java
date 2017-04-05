@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 import static com.company.variables.Variable.array_for_bubble;
 import static com.company.variables.Variable.rectangle_array_for_bubble;
+import static com.company.variables.Variable.setIndex_of_spaw_element_bubble;
 
 /**
  * Created by Roman on 30.03.2017.
@@ -16,14 +17,18 @@ import static com.company.variables.Variable.rectangle_array_for_bubble;
 public class Bubble_sort_panel extends JPanel implements Runnable {
 
     Thread thread;
-    boolean now_sort = true;
+    boolean now_sort = false;
+    boolean isFinish = false;
 
     public Bubble_sort_panel() {
         now_sort = false;
+        isFinish = false;
+        repaint();
     }
 
     public void bubble_sort() throws InterruptedException {
         now_sort = true;
+        isFinish= false;
         thread = new Thread(this);
         thread.start();
     }
@@ -35,17 +40,24 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         for (int i = 0; i < Constant.getN(); i++) {               // активные прямоугольники выделить другим цветом
-            if (i == Variable.getIndex_of_spaw_element_bubble() || i == Variable.getIndex_of_spaw_element_bubble()+1) {
-                g2.setColor(Constant.getColorOfActyveRectangle());
+
+            if(isFinish){
+                g2.setColor(Constant.getColorOfFullSortRectangle());
                 g2.fill(rectangle_array_for_bubble[i]);
+            }else {
+                if (i == Variable.getIndex_of_spaw_element_bubble() || i == Variable.getIndex_of_spaw_element_bubble() + 1) {
+                    g2.setColor(Constant.getColorOfActyveRectangle());
+                    g2.fill(rectangle_array_for_bubble[i]);
+                } else {
+                    g2.setColor(Constant.getColorOfRectangle());
+                    g2.fill(rectangle_array_for_bubble[i]);
+                }
             }
-            else {
-                g2.setColor(Constant.getColorOfRectangle());
-                g2.fill(rectangle_array_for_bubble[i]);
-            }
+
         }
 
-        System.out.println("Was paint in Bubble_sort_panel");
+
+//        System.out.println("Was paint in Bubble_sort_panel");
     }
 
     @Override
@@ -58,13 +70,9 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                         if (array_for_bubble[j] > array_for_bubble[j + 1]) {
                             Variable.setIndex_of_spaw_element_bubble(j);
 
-                            /*
+                            repaint();
 
-                                 // нужно перерисовать
-
-                             */
-
-                            Thread.sleep(1000);
+                            Thread.sleep(1);
 
                             int t = array_for_bubble[j];
                             double posX = rectangle_array_for_bubble[j].getX();
@@ -82,7 +90,7 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                     }
                 }
 
-                now_sort = false;
+
 
                 System.out.println("FINISH BUBBLE SORT !");
 
@@ -91,15 +99,16 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                 }
                 System.out.println();
 
+                now_sort = false;
+                isFinish = true;
+                repaint();
+                thread.interrupt();
+
+                System.out.println();
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        if (!now_sort) {
-            thread.interrupt();
-        }
-
     }
 }

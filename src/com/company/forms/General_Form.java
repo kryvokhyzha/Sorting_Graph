@@ -1,7 +1,6 @@
 package com.company.forms;
 
 import com.company.sortes.Random_sort;
-import com.company.sortes.bubble.BubbleSort;
 import com.company.states.*;
 import com.company.variables.Constant;
 import com.company.variables.Variable;
@@ -19,7 +18,7 @@ import static com.company.variables.Variable.*;
 /**
  * Created by Roman on 27.03.2017.
  */
-public class General_Form extends JFrame {
+public class General_Form extends JFrame implements Runnable {
 
     private JTabbedPane tabbedPane1;
     private JButton buttonStart;
@@ -33,6 +32,7 @@ public class General_Form extends JFrame {
     private JButton buttonDelayUp;
     private JLabel labelDelay;
     private JTextField input;
+    private Thread thread;
 
 
     public General_Form() {
@@ -61,6 +61,9 @@ public class General_Form extends JFrame {
         init_var();
 
         input.setEnabled(false);
+
+        thread = new Thread(this);
+        thread.start();
     }
 
     private void init_listener(){
@@ -157,6 +160,18 @@ public class General_Form extends JFrame {
         return labelDelay;
     }
 
+    @Override
+    public void run() {
+        while (true){
+            repaint();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 
     private class MyMouse extends MouseAdapter{
@@ -223,6 +238,8 @@ public class General_Form extends JFrame {
 
             if(source == buttonAuto){
                 System.out.println("Press buttonAuto");
+
+                repaint();
             }
 
 

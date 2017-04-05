@@ -16,6 +16,7 @@ public class Constant {
     private static final int WIDTH_OF_RECTANGLE = 10;
     private static final Color COLOR_OF_RECTANGLE = new Color(87, 116, 155);
     private static final Color COLOR_OF_ACTYVE_RECTANGLE = new Color(200, 77, 72);
+    private static final Color COLOR_OF_FULL_SORT_RECTANGLE = new Color(25, 118, 16);
 
 
 
@@ -53,5 +54,9 @@ public class Constant {
 
     public static Color getColorOfActyveRectangle() {
         return COLOR_OF_ACTYVE_RECTANGLE;
+    }
+
+    public static Color getColorOfFullSortRectangle() {
+        return COLOR_OF_FULL_SORT_RECTANGLE;
     }
 }
