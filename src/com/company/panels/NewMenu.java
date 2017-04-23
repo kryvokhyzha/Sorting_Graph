@@ -1,4 +1,4 @@
-package com.company.states;
+package com.company.panels;
 
 import java.awt.*;
 

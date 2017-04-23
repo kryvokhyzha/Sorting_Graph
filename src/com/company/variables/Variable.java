@@ -11,9 +11,19 @@ public class Variable {
     private static boolean frame_visible = true;
     private static boolean frame_resizable = false;
     private static boolean is_spaw_bubble = true;
+    private static boolean is_start_bubble = false;
+    private static boolean is_start_insertion = false;
+    private static boolean is_start_merge = false;
+    private static boolean is_start_quick = false;
     private static int is_act_panel;
     private static int index_of_spaw_element_bubble;
+    private static int index_of_spaw_element_insertion_general;
+    private static int index_of_spaw_element_insertion_buf;
+    private static int index_of_spaw_element_merge;
+    private static int index_of_spaw_element_quick;
     private static int N = 0;
+    private static int index_of_delay = 0;
+    private static int index_of_delay_buf = 0;
     public static int array_for_bubble[];
     public static int array_for_merge[];
     public static int array_for_quick[];
@@ -23,6 +33,26 @@ public class Variable {
     public static Rectangle2D rectangle_array_for_quick[];
     public static Rectangle2D rectangle_array_for_insertion[];
 
+
+    public static int getIndex_of_spaw_element_insertion_general() {
+        return index_of_spaw_element_insertion_general;
+    }
+
+    public static int getIndex_of_spaw_element_insertion_buf() {
+        return index_of_spaw_element_insertion_buf;
+    }
+
+    public static int getIndex_of_spaw_element_merge() {
+        return index_of_spaw_element_merge;
+    }
+
+    public static int getIndex_of_spaw_element_quick() {
+        return index_of_spaw_element_quick;
+    }
+
+    public static int getIndex_of_delay() {
+        return index_of_delay;
+    }
 
     public static int getN() {
         return N;
@@ -52,74 +82,30 @@ public class Variable {
         return is_act_panel;
     }
 
-    public static Rectangle2D[] getRectangle_array_for_bubble() {
-        return rectangle_array_for_bubble;
+    public static int getIndex_of_delay_buf() {
+        return index_of_delay_buf;
     }
 
-    public static int[] getArray_for_bubble() {
-        return array_for_bubble;
+    public static boolean is_start_bubble() {
+        return is_start_bubble;
     }
 
-    public static int[] getArray_for_merge() {
-        return array_for_merge;
+    public static boolean is_start_insertion() {
+        return is_start_insertion;
     }
 
-    public static int[] getArray_for_quick() {
-        return array_for_quick;
+    public static boolean is_start_merge() {
+        return is_start_merge;
     }
 
-    public static int[] getArray_for_insertion() {
-        return array_for_insertion;
-    }
-
-    public static Rectangle2D[] getRectangle_array_for_merge() {
-        return rectangle_array_for_merge;
-    }
-
-    public static Rectangle2D[] getRectangle_array_for_quick() {
-        return rectangle_array_for_quick;
-    }
-
-    public static Rectangle2D[] getRectangle_array_for_insertion() {
-        return rectangle_array_for_insertion;
+    public static boolean is_start_quick() {
+        return is_start_quick;
     }
 
 
 
     public static void setIs_act_panel(int is_act_panel) {
         Variable.is_act_panel = is_act_panel;
-    }
-
-    public static void setRectangle_array_for_bubble(Rectangle2D[] rectangle_array_for_bubble) {
-        Variable.rectangle_array_for_bubble = rectangle_array_for_bubble;
-    }
-
-    public static void setArray_for_bubble(int[] array_for_bubble) {
-        Variable.array_for_bubble = array_for_bubble;
-    }
-
-    public static void setArray_for_merge(int[] array_for_merge) {
-        Variable.array_for_merge = array_for_merge;
-    }
-
-    public static void setArray_for_quick(int[] array_for_quick) {
-        Variable.array_for_quick = array_for_quick;
-    }
-
-    public static void setArray_for_insertion(int[] array_for_insertion) {
-        Variable.array_for_insertion = array_for_insertion;
-    }
-
-    public static void setRectangle_array_for_merge(Rectangle2D[] rectangle_array_for_merge) {
-        Variable.rectangle_array_for_merge = rectangle_array_for_merge;
-    }
-
-    public static void setRectangle_array_for_quick(Rectangle2D[] rectangle_array_for_quick) {
-        Variable.rectangle_array_for_quick = rectangle_array_for_quick;
-    }
-
-    public static void setRectangle_array_for_insertion(Rectangle2D[] rectangle_array_for_insertion) {
-        Variable.rectangle_array_for_insertion = rectangle_array_for_insertion;
     }
 
     public static void setIndex_of_spaw_element_bubble(int index_of_spaw_element_bubble) {
@@ -132,5 +118,49 @@ public class Variable {
 
     public static void setN(int n) {
         N = n;
+    }
+
+    public static void setIndex_of_delay(int index_of_delay) {
+        Variable.index_of_delay = index_of_delay;
+    }
+
+    public static void setIndex_of_spaw_element_insertion(int index_of_spaw_element_insertion) {
+        Variable.index_of_spaw_element_insertion_general = index_of_spaw_element_insertion;
+    }
+
+    public static void setIndex_of_spaw_element_merge(int index_of_spaw_element_merge) {
+        Variable.index_of_spaw_element_merge = index_of_spaw_element_merge;
+    }
+
+    public static void setIndex_of_spaw_element_quick(int index_of_spaw_element_quick) {
+        Variable.index_of_spaw_element_quick = index_of_spaw_element_quick;
+    }
+
+    public static void setIndex_of_spaw_element_insertion_general(int index_of_spaw_element_insertion_general) {
+        Variable.index_of_spaw_element_insertion_general = index_of_spaw_element_insertion_general;
+    }
+
+    public static void setIndex_of_spaw_element_insertion_buf(int index_of_spaw_element_insertion_buf) {
+        Variable.index_of_spaw_element_insertion_buf = index_of_spaw_element_insertion_buf;
+    }
+
+    public static void setIndex_of_delay_buf(int index_of_delay_buf) {
+        Variable.index_of_delay_buf = index_of_delay_buf;
+    }
+
+    public static void setIs_start_bubble(boolean is_start_bubble) {
+        Variable.is_start_bubble = is_start_bubble;
+    }
+
+    public static void setIs_start_insertion(boolean is_start_insertion) {
+        Variable.is_start_insertion = is_start_insertion;
+    }
+
+    public static void setIs_start_merge(boolean is_start_merge) {
+        Variable.is_start_merge = is_start_merge;
+    }
+
+    public static void setIs_start_quick(boolean is_start_quick) {
+        Variable.is_start_quick = is_start_quick;
     }
 }

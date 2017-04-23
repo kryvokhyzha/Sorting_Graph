@@ -1,4 +1,4 @@
-package com.company.states;
+package com.company.panels;
 
 import com.company.variables.Constant;
 import com.company.variables.Variable;
@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * Created by Roman on 31.03.2017.
  */
-public class Quick_sort_panel extends JPanel {
+public class Merge_sort_panel extends JPanel {
 
     @Override
     public void paint(Graphics g){
@@ -19,8 +19,8 @@ public class Quick_sort_panel extends JPanel {
 
         g2.setColor(Constant.getColorOfRectangle());
         for (int i = 0; i < Constant.getN(); i++)
-            g2.fill(Variable.rectangle_array_for_quick[i]);
+            g2.fill(Variable.rectangle_array_for_merge[i]);
 
-        System.out.println("Was paint in Quick_sort_panel");;
+        System.out.println("Was paint in Merge_sort_panel");;
     }
 }

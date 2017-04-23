@@ -1,7 +1,7 @@
 package com.company.forms;
 
-import com.company.sortes.Random_sort;
-import com.company.states.*;
+import com.company.random.Random_sort;
+import com.company.panels.*;
 import com.company.variables.Constant;
 import com.company.variables.Variable;
 
@@ -23,15 +23,12 @@ public class General_Form extends JFrame implements Runnable {
     private JTabbedPane tabbedPane1;
     private JButton buttonStart;
     private JButton buttonRandomize;
-    private JButton buttonRestart;
-    private JButton buttonStop;
     private JPanel panel;
     private JButton buttonDelayDown;
-    private JButton buttonNext;
-    private JButton buttonAuto;
     private JButton buttonDelayUp;
     private JLabel labelDelay;
     private JTextField input;
+    private JButton buttonStop;
     private Thread thread;
 
 
@@ -62,6 +59,8 @@ public class General_Form extends JFrame implements Runnable {
 
         input.setEnabled(false);
 
+        buttonStop.setEnabled(false);
+
         thread = new Thread(this);
         thread.start();
     }
@@ -70,14 +69,9 @@ public class General_Form extends JFrame implements Runnable {
         tabbedPane1.addMouseListener(new MyMouse() );
 
         buttonStart.addActionListener(new MyButton() );
-        buttonAuto.addActionListener(new MyButton() );
         buttonDelayDown.addActionListener(new MyButton() );
         buttonDelayUp.addActionListener(new MyButton() );
-        buttonNext.addActionListener(new MyButton() );
         buttonRandomize.addActionListener(new MyButton() );
-        buttonRestart.addActionListener(new MyButton() );
-        buttonStop.addActionListener(new MyButton() );
-
         input.addActionListener(new MyKey() );
     }
 
@@ -110,6 +104,10 @@ public class General_Form extends JFrame implements Runnable {
             rectangle_array_for_merge[i] = new Rectangle2D.Double(100 + (Constant.getWidthBetweenRectangle() + Constant.getWidthOfRectangle() ) * i , 500 - 4 * array_for_merge[i] , Constant.getWidthOfRectangle(), 4 * array_for_merge[i] );
             rectangle_array_for_quick[i] = new Rectangle2D.Double(100 + (Constant.getWidthBetweenRectangle() + Constant.getWidthOfRectangle() ) * i , 500 - 4 * array_for_quick[i] , Constant.getWidthOfRectangle(), 4 * array_for_quick[i] );
         }
+
+        Variable.setIndex_of_delay(0);
+        labelDelay.setText("Delay: " + Constant.getDELAYS()[Variable.getIndex_of_delay()]);
+        enabled_button_of_delay();
     }
 
     private void init_menu(){
@@ -132,24 +130,8 @@ public class General_Form extends JFrame implements Runnable {
         return buttonRandomize;
     }
 
-    public JButton getButtonRestart() {
-        return buttonRestart;
-    }
-
-    public JButton getButtonStop() {
-        return buttonStop;
-    }
-
     public JButton getButtonDelayDown() {
         return buttonDelayDown;
-    }
-
-    public JButton getButtonNext() {
-        return buttonNext;
-    }
-
-    public JButton getButtonAuto() {
-        return buttonAuto;
     }
 
     public JButton getButtonDelayUp() {
@@ -165,7 +147,7 @@ public class General_Form extends JFrame implements Runnable {
         while (true){
             repaint();
             try {
-                Thread.sleep(10);
+                Thread.sleep(25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -173,6 +155,17 @@ public class General_Form extends JFrame implements Runnable {
 
     }
 
+    public void enabled_button_of_delay(){
+        if(Variable.getIndex_of_delay() == 0)
+            buttonDelayDown.setEnabled(false);
+        else
+            buttonDelayDown.setEnabled(true);
+
+        if(Variable.getIndex_of_delay() == (Constant.getInitializeDelay() - 2) )
+            buttonDelayUp.setEnabled(false);
+        else
+            buttonDelayUp.setEnabled(true);
+    }
 
     private class MyMouse extends MouseAdapter{
         @Override
@@ -202,7 +195,6 @@ public class General_Form extends JFrame implements Runnable {
         }
     }
     private class MyButton implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
@@ -215,8 +207,6 @@ public class General_Form extends JFrame implements Runnable {
                 if(Variable.getIs_act_panel() == 0){
                     System.out.println('\t' + "Start Bubble sort...");
 
-//                    BubbleSort bubbleSort = new BubbleSort();
-//                    bubbleSort.bubble_sort();
                     Bubble_sort_panel bubble_sort_panel = new Bubble_sort_panel();
                     try {
                         bubble_sort_panel.bubble_sort();
@@ -225,7 +215,14 @@ public class General_Form extends JFrame implements Runnable {
                     }
                 }
                 if(Variable.getIs_act_panel() == 1){
-                    // Start Insertion sort
+                    System.out.println('\t' + "Start Insertion sort...");
+
+                    Insertion_sort_panel insertion_sort_panel = new Insertion_sort_panel();
+                    try {
+                        insertion_sort_panel.insertion_sort();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
                 if(Variable.getIs_act_panel() == 2){
                     // Start Merge sort
@@ -236,27 +233,41 @@ public class General_Form extends JFrame implements Runnable {
 
             }
 
-            if(source == buttonAuto){
-                System.out.println("Press buttonAuto");
+            if(source == buttonStop ){
+                System.out.println("Press buttonStop");
 
-                repaint();
+                if(Variable.getIndex_of_delay() != 7) {
+                    Variable.setIndex_of_delay_buf(Variable.getIndex_of_delay());
+                    Variable.setIndex_of_delay(7);
+                }
+                else
+                    Variable.setIndex_of_delay(Variable.getIndex_of_delay_buf());
             }
-
 
             if(source == buttonDelayDown){
                 System.out.println("Press buttonDelayDown");
+
+                if(Variable.getIndex_of_delay() != 0) {
+                    Variable.setIndex_of_delay(Variable.getIndex_of_delay() - 1);
+
+                    labelDelay.setText("Delay: " + Constant.getDELAYS()[Variable.getIndex_of_delay()]);
+                }
+
+                enabled_button_of_delay();
             }
 
 
             if(source == buttonDelayUp){
                 System.out.println("Press buttonDelayUp");
+
+                if(Variable.getIndex_of_delay() != (Constant.getInitializeDelay() - 2) ) {
+                    Variable.setIndex_of_delay(Variable.getIndex_of_delay() + 1);
+
+                    labelDelay.setText("Delay: " + Constant.getDELAYS()[Variable.getIndex_of_delay()]);
+                }
+
+                enabled_button_of_delay();
             }
-
-
-            if(source == buttonNext){
-                System.out.println("Press buttonNext");
-            }
-
 
             if(source == buttonRandomize){
                 System.out.println("Press buttonRandomize");
@@ -272,16 +283,6 @@ public class General_Form extends JFrame implements Runnable {
 
                 if(Variable.getIs_act_panel() == 3)
                     Random_sort.start_randomize_for_quick();
-            }
-
-
-            if(source == buttonRestart){
-                System.out.println("Press buttonRestart");
-            }
-
-
-            if(source == buttonStop){
-                System.out.println("Press buttonStop");
             }
 
         }

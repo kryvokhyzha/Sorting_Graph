@@ -9,16 +9,20 @@ public class Constant {
 
     private static final int WIDTH_FRAME = 1920;
     private static final int HEIGHT_FRAME = 1280;
-    private static final int INITIALIZE_DELAY = 4;
-    private static final int[] DELAYS = new int[]{100 , 200, 250, 400, 500, 1000, 2000, 2500};
+    private static final int INITIALIZE_DELAY = 8;
+    private static final int[] DELAYS = new int[]{50, 100, 200, 250, 400, 500, 1000, 2147485};
     private static final int N = 50;
     private static final int WIDTH_BETWEEN_RECTANGLE = 5;
     private static final int WIDTH_OF_RECTANGLE = 10;
     private static final Color COLOR_OF_RECTANGLE = new Color(87, 116, 155);
     private static final Color COLOR_OF_ACTYVE_RECTANGLE = new Color(200, 77, 72);
+    private static final Color COLOR_OF_ACTYVE_BUF_RECTANGLE = new Color(25, 118, 16);
     private static final Color COLOR_OF_FULL_SORT_RECTANGLE = new Color(25, 118, 16);
 
 
+    public static Color getColorOfActyveBufRectangle() {
+        return COLOR_OF_ACTYVE_BUF_RECTANGLE;
+    }
 
     public static int getWidthFrame() {
         return WIDTH_FRAME;

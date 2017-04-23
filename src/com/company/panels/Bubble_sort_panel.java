@@ -1,4 +1,4 @@
-package com.company.states;
+package com.company.panels;
 
 import com.company.variables.Constant;
 import com.company.variables.Variable;
@@ -9,7 +9,6 @@ import java.awt.geom.Rectangle2D;
 
 import static com.company.variables.Variable.array_for_bubble;
 import static com.company.variables.Variable.rectangle_array_for_bubble;
-import static com.company.variables.Variable.setIndex_of_spaw_element_bubble;
 
 /**
  * Created by Roman on 30.03.2017.
@@ -39,7 +38,7 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        for (int i = 0; i < Constant.getN(); i++) {               // активные прямоугольники выделить другим цветом
+        for (int i = 0; i < Constant.getN(); i++) {
 
             if(isFinish){
                 g2.setColor(Constant.getColorOfFullSortRectangle());
@@ -55,9 +54,6 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
             }
 
         }
-
-
-//        System.out.println("Was paint in Bubble_sort_panel");
     }
 
     @Override
@@ -72,7 +68,7 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
 
                             repaint();
 
-                            Thread.sleep(1);
+                            Thread.sleep(Constant.getDELAYS()[Variable.getIndex_of_delay()]);
 
                             int t = array_for_bubble[j];
                             double posX = rectangle_array_for_bubble[j].getX();

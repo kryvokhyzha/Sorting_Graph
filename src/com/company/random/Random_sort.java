@@ -1,9 +1,9 @@
-package com.company.sortes;
+package com.company.random;
 
-import com.company.states.Bubble_sort_panel;
-import com.company.states.Insertion_sort_panel;
-import com.company.states.Merge_sort_panel;
-import com.company.states.Quick_sort_panel;
+import com.company.panels.Bubble_sort_panel;
+import com.company.panels.Insertion_sort_panel;
+import com.company.panels.Merge_sort_panel;
+import com.company.panels.Quick_sort_panel;
 import com.company.variables.Constant;
 
 import java.awt.geom.Rectangle2D;
