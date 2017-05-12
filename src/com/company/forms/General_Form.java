@@ -225,10 +225,24 @@ public class General_Form extends JFrame implements Runnable {
                     }
                 }
                 if(Variable.getIs_act_panel() == 2){
-                    // Start Merge sort
+                    System.out.println('\t' + "Start Merge sort...");
+
+                    Merge_sort_panel merge_sort_panel = new Merge_sort_panel();
+                    try {
+                        merge_sort_panel.merge_sort();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
                 if(Variable.getIs_act_panel() == 3){
-                    // Start Quick sort
+                    System.out.println('\t' + "Start Quick sort...");
+
+                    Quick_sort_panel quick_sort_panel = new Quick_sort_panel();
+                    try {
+                        quick_sort_panel.quick_sort();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
 
             }
@@ -294,6 +308,7 @@ public class General_Form extends JFrame implements Runnable {
             Object source = e.getSource();
 
             if(source == input) {
+                Variable.setN(Integer.parseInt(input.getText()));
             }
 
         }

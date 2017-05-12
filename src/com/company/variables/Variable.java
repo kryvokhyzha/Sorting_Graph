@@ -16,11 +16,13 @@ public class Variable {
     private static boolean is_start_merge = false;
     private static boolean is_start_quick = false;
     private static int is_act_panel;
-    private static int index_of_spaw_element_bubble;
-    private static int index_of_spaw_element_insertion_general;
-    private static int index_of_spaw_element_insertion_buf;
-    private static int index_of_spaw_element_merge;
-    private static int index_of_spaw_element_quick;
+    private static int index_of_spaw_element_bubble = 0;
+    private static int index_of_spaw_element_insertion_general = 0;
+    private static int index_of_spaw_element_insertion_buf = 0;
+    private static int index_of_spaw_element_merge_general = 0;
+    private static int index_of_spaw_element_merge_buf = 0;
+    private static int index_of_spaw_element_quick_general = 0;
+    private static int index_of_spaw_element_quick_buf = 0;
     private static int N = 0;
     private static int index_of_delay = 0;
     private static int index_of_delay_buf = 0;
@@ -34,6 +36,14 @@ public class Variable {
     public static Rectangle2D rectangle_array_for_insertion[];
 
 
+    public static int getIndex_of_spaw_element_merge_buf() {
+        return index_of_spaw_element_merge_buf;
+    }
+
+    public static int getIndex_of_spaw_element_quick_buf() {
+        return index_of_spaw_element_quick_buf;
+    }
+
     public static int getIndex_of_spaw_element_insertion_general() {
         return index_of_spaw_element_insertion_general;
     }
@@ -42,12 +52,12 @@ public class Variable {
         return index_of_spaw_element_insertion_buf;
     }
 
-    public static int getIndex_of_spaw_element_merge() {
-        return index_of_spaw_element_merge;
+    public static int getIndex_of_spaw_element_merge_general() {
+        return index_of_spaw_element_merge_general;
     }
 
-    public static int getIndex_of_spaw_element_quick() {
-        return index_of_spaw_element_quick;
+    public static int getIndex_of_spaw_element_quick_general() {
+        return index_of_spaw_element_quick_general;
     }
 
     public static int getIndex_of_delay() {
@@ -128,12 +138,12 @@ public class Variable {
         Variable.index_of_spaw_element_insertion_general = index_of_spaw_element_insertion;
     }
 
-    public static void setIndex_of_spaw_element_merge(int index_of_spaw_element_merge) {
-        Variable.index_of_spaw_element_merge = index_of_spaw_element_merge;
+    public static void setIndex_of_spaw_element_merge_general(int index_of_spaw_element_merge_general) {
+        Variable.index_of_spaw_element_merge_general = index_of_spaw_element_merge_general;
     }
 
-    public static void setIndex_of_spaw_element_quick(int index_of_spaw_element_quick) {
-        Variable.index_of_spaw_element_quick = index_of_spaw_element_quick;
+    public static void setIndex_of_spaw_element_quick_general(int index_of_spaw_element_quick_general) {
+        Variable.index_of_spaw_element_quick_general = index_of_spaw_element_quick_general;
     }
 
     public static void setIndex_of_spaw_element_insertion_general(int index_of_spaw_element_insertion_general) {
@@ -162,5 +172,13 @@ public class Variable {
 
     public static void setIs_start_quick(boolean is_start_quick) {
         Variable.is_start_quick = is_start_quick;
+    }
+
+    public static void setIndex_of_spaw_element_quick_buf(int index_of_spaw_element_quick_buf) {
+        Variable.index_of_spaw_element_quick_buf = index_of_spaw_element_quick_buf;
+    }
+
+    public static void setIndex_of_spaw_element_merge_buf(int index_of_spaw_element_merge_buf) {
+        Variable.index_of_spaw_element_merge_buf = index_of_spaw_element_merge_buf;
     }
 }

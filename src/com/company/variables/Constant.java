@@ -20,6 +20,7 @@ public class Constant {
     private static final Color COLOR_OF_FULL_SORT_RECTANGLE = new Color(25, 118, 16);
 
 
+
     public static Color getColorOfActyveBufRectangle() {
         return COLOR_OF_ACTYVE_BUF_RECTANGLE;
     }

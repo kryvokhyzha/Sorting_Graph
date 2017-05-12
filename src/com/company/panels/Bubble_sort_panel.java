@@ -44,7 +44,7 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                 g2.setColor(Constant.getColorOfFullSortRectangle());
                 g2.fill(rectangle_array_for_bubble[i]);
             }else {
-                if (i == Variable.getIndex_of_spaw_element_bubble() || i == Variable.getIndex_of_spaw_element_bubble() + 1) {
+                if (i == Variable.getIndex_of_spaw_element_bubble()) {
                     g2.setColor(Constant.getColorOfActyveRectangle());
                     g2.fill(rectangle_array_for_bubble[i]);
                 } else {
