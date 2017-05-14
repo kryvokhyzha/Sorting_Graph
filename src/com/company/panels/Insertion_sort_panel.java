@@ -63,8 +63,15 @@ public class Insertion_sort_panel extends JPanel implements Runnable {
                 int temp, j;
                 Rectangle2D r;
 
+                Variable.setStart_for_insertion(System.currentTimeMillis());
+
                 for (int i = 0; i < array_for_insertion.length - 1; i++){
                     if(array_for_insertion[i] > array_for_insertion[i + 1]){
+
+                        while (!Variable.isShouldQuitInsertion()) {
+                            Thread.sleep(50);
+                        }
+
                         temp = array_for_insertion[i + 1];
 
                         r = new Rectangle2D.Double(rectangle_array_for_insertion[i+1].getX(), rectangle_array_for_insertion[i+1].getY(), rectangle_array_for_insertion[i+1].getWidth(), rectangle_array_for_insertion[i+1].getHeight());
@@ -84,6 +91,11 @@ public class Insertion_sort_panel extends JPanel implements Runnable {
                         j = i;
 
                         while (j > 0 && temp < array_for_insertion[j - 1]){
+
+                            while (!Variable.isShouldQuitInsertion()) {
+                                Thread.sleep(50);
+                            }
+
                             array_for_insertion[j] = array_for_insertion[j - 1];
 
                             posX = rectangle_array_for_insertion[j].getX();
@@ -113,6 +125,10 @@ public class Insertion_sort_panel extends JPanel implements Runnable {
                     }
                 }
 
+                Variable.setFinish_for_insertion(System.currentTimeMillis());
+
+                JOptionPane.showMessageDialog(null , "Время выполнения Insertion sort: " + ( Variable.getFinish_for_insertion() - Variable.getStart_for_insertion() ) + " мс");
+
                 System.out.println("FINISH INSERTION SORT !");
                 Rectangle2D e = rectangle_array_for_insertion[0];
 
@@ -127,6 +143,8 @@ public class Insertion_sort_panel extends JPanel implements Runnable {
                 thread.interrupt();
 
                 System.out.println();
+
+                Variable.setIs_start_insertion(false);
             }
             catch (InterruptedException e) {
                 e.printStackTrace();

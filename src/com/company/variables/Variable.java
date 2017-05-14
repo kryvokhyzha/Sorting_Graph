@@ -15,6 +15,10 @@ public class Variable {
     private static boolean is_start_insertion = false;
     private static boolean is_start_merge = false;
     private static boolean is_start_quick = false;
+    private static boolean shouldQuitBubble = true;
+    private static boolean shouldQuitInsertion = true;
+    private static boolean shouldQuitMerge = true;
+    private static boolean shouldQuitQuick = true;
     private static int is_act_panel;
     private static int index_of_spaw_element_bubble = 0;
     private static int index_of_spaw_element_insertion_general = 0;
@@ -23,7 +27,8 @@ public class Variable {
     private static int index_of_spaw_element_merge_buf = 0;
     private static int index_of_spaw_element_quick_general = 0;
     private static int index_of_spaw_element_quick_buf = 0;
-    private static int N = 0;
+    private static int N = 50;
+    private static int K = 1000 / N;
     private static int index_of_delay = 0;
     private static int index_of_delay_buf = 0;
     public static int array_for_bubble[];
@@ -34,7 +39,67 @@ public class Variable {
     public static Rectangle2D rectangle_array_for_merge[];
     public static Rectangle2D rectangle_array_for_quick[];
     public static Rectangle2D rectangle_array_for_insertion[];
+    private static long start_for_bubble;
+    private static long finish_for_bubble;
+    private static long start_for_insertion;
+    private static long finish_for_insertion;
+    private static long start_for_merge;
+    private static long finish_for_merge;
+    private static long start_for_quick;
+    private static long finish_for_quick;
 
+
+    public static int getK() {
+        return K;
+    }
+
+    public static boolean isShouldQuitBubble() {
+        return shouldQuitBubble;
+    }
+
+    public static boolean isShouldQuitInsertion() {
+        return shouldQuitInsertion;
+    }
+
+    public static boolean isShouldQuitQuick() {
+        return shouldQuitQuick;
+    }
+
+    public static boolean isShouldQuitMerge() {
+        return shouldQuitMerge;
+    }
+
+    public static long getStart_for_bubble() {
+        return start_for_bubble;
+    }
+
+    public static long getFinish_for_bubble() {
+        return finish_for_bubble;
+    }
+
+    public static long getStart_for_insertion() {
+        return start_for_insertion;
+    }
+
+    public static long getFinish_for_insertion() {
+        return finish_for_insertion;
+    }
+
+    public static long getStart_for_merge() {
+        return start_for_merge;
+    }
+
+    public static long getFinish_for_merge() {
+        return finish_for_merge;
+    }
+
+    public static long getStart_for_quick() {
+        return start_for_quick;
+    }
+
+    public static long getFinish_for_quick() {
+        return finish_for_quick;
+    }
 
     public static int getIndex_of_spaw_element_merge_buf() {
         return index_of_spaw_element_merge_buf;
@@ -180,5 +245,57 @@ public class Variable {
 
     public static void setIndex_of_spaw_element_merge_buf(int index_of_spaw_element_merge_buf) {
         Variable.index_of_spaw_element_merge_buf = index_of_spaw_element_merge_buf;
+    }
+
+    public static void setStart_for_bubble(long start_for_bubble) {
+        Variable.start_for_bubble = start_for_bubble;
+    }
+
+    public static void setFinish_for_bubble(long finish_for_bubble) {
+        Variable.finish_for_bubble = finish_for_bubble;
+    }
+
+    public static void setStart_for_insertion(long start_for_insertion) {
+        Variable.start_for_insertion = start_for_insertion;
+    }
+
+    public static void setFinish_for_insertion(long finish_for_insertion) {
+        Variable.finish_for_insertion = finish_for_insertion;
+    }
+
+    public static void setStart_for_merge(long start_for_merge) {
+        Variable.start_for_merge = start_for_merge;
+    }
+
+    public static void setFinish_for_merge(long finish_for_merge) {
+        Variable.finish_for_merge = finish_for_merge;
+    }
+
+    public static void setStart_for_quick(long start_for_quick) {
+        Variable.start_for_quick = start_for_quick;
+    }
+
+    public static void setFinish_for_quick(long finish_for_quick) {
+        Variable.finish_for_quick = finish_for_quick;
+    }
+
+    public static void setShouldQuitMerge(boolean shouldQuitMerge) {
+        Variable.shouldQuitMerge = shouldQuitMerge;
+    }
+
+    public static void setShouldQuitBubble(boolean shouldQuitBubble) {
+        Variable.shouldQuitBubble = shouldQuitBubble;
+    }
+
+    public static void setShouldQuitInsertion(boolean shouldQuitInsertion) {
+        Variable.shouldQuitInsertion = shouldQuitInsertion;
+    }
+
+    public static void setShouldQuitQuick(boolean shouldQuitQuick) {
+        Variable.shouldQuitQuick = shouldQuitQuick;
+    }
+
+    public static void setK(int k) {
+        K = k;
     }
 }

@@ -81,6 +81,11 @@ public class Merge_sort_panel extends JPanel implements Runnable {
             double posX;
             while (i <= middle && j <= higherIndex) {
                 if (tempMergArr[i] <= tempMergArr[j]) {
+
+                    while (!Variable.isShouldQuitMerge()) {
+                        Thread.sleep(50);
+                    }
+
                     array_for_merge[k] = tempMergArr[i];
 
                     posX = rectangle_array_for_merge[k].getX();
@@ -95,6 +100,11 @@ public class Merge_sort_panel extends JPanel implements Runnable {
 
                     i++;
                 } else {
+
+                    while (!Variable.isShouldQuitMerge()) {
+                        Thread.sleep(50);
+                    }
+
                     array_for_merge[k] = tempMergArr[j];
 
                     posX = rectangle_array_for_merge[k].getX();
@@ -141,7 +151,14 @@ public class Merge_sort_panel extends JPanel implements Runnable {
             this.length = array_for_merge.length;
             this.tempMergArr = new int[length];
             temp_rectangle_array_for_merge = new Rectangle2D[Constant.getN()];
+
+            Variable.setStart_for_merge(System.currentTimeMillis());
+
             doMergeSort(0, length - 1);
+
+            Variable.setFinish_for_merge(System.currentTimeMillis());
+
+            JOptionPane.showMessageDialog(null , "Время выполнения Merge sort: " + ( Variable.getFinish_for_merge() - Variable.getStart_for_merge() ) + " мс");
 
             System.out.println("FINISH MERGE SORT !");
 
@@ -156,6 +173,8 @@ public class Merge_sort_panel extends JPanel implements Runnable {
             thread.interrupt();
 
             System.out.println();
+
+            Variable.setIs_start_merge(false);
         }
 
     }

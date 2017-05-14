@@ -6,10 +6,7 @@ import com.company.variables.Constant;
 import com.company.variables.Variable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 
 import static com.company.variables.Variable.*;
@@ -57,9 +54,12 @@ public class General_Form extends JFrame implements Runnable {
         init_listener();
         init_var();
 
+        input.setText("50");
         input.setEnabled(false);
+        Variable.setN(100);
+        Variable.setK(100/Variable.getN());
 
-        buttonStop.setEnabled(false);
+       // buttonStop.setEnabled(false);
 
         thread = new Thread(this);
         thread.start();
@@ -69,10 +69,10 @@ public class General_Form extends JFrame implements Runnable {
         tabbedPane1.addMouseListener(new MyMouse() );
 
         buttonStart.addActionListener(new MyButton() );
+        buttonStop.addActionListener(new MyButton() );
         buttonDelayDown.addActionListener(new MyButton() );
         buttonDelayUp.addActionListener(new MyButton() );
         buttonRandomize.addActionListener(new MyButton() );
-        input.addActionListener(new MyKey() );
     }
 
     private void init_var(){
@@ -148,6 +148,25 @@ public class General_Form extends JFrame implements Runnable {
             repaint();
             try {
                 Thread.sleep(25);
+                int l = input.getText().length();
+                String string1 = input.getText();
+
+                try {
+                    for (int i = 0; i < l; i++) {
+                        if (!Character.isDigit(string1.charAt(i))) {
+                            string1 = string1.substring(0, i) + string1.substring(i + 1);
+                        }
+
+                    }
+                    if(Integer.parseInt(string1) >= 1000 || Integer.parseInt(string1) <= 0)
+                        string1 = string1.substring(0, string1.length() - 1);
+
+                } catch (Exception ex){
+                }
+
+                input.setText(string1);
+                input.setCaretPosition(input.getText().length());
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -204,8 +223,14 @@ public class General_Form extends JFrame implements Runnable {
             if(source == buttonStart){
                 System.out.println("Press buttonStart!");
 
-                if(Variable.getIs_act_panel() == 0){
+                if(Variable.getIs_act_panel() == 0 && !Variable.is_start_bubble()){
                     System.out.println('\t' + "Start Bubble sort...");
+
+                    if(!Variable.is_start_bubble() && !Variable.is_start_insertion() && !Variable.is_start_merge() && !Variable.is_start_quick()){
+                        Variable.setN(Integer.parseInt(input.getText()));
+                    }
+
+                    Variable.setIs_start_bubble(true);
 
                     Bubble_sort_panel bubble_sort_panel = new Bubble_sort_panel();
                     try {
@@ -214,8 +239,10 @@ public class General_Form extends JFrame implements Runnable {
                         e1.printStackTrace();
                     }
                 }
-                if(Variable.getIs_act_panel() == 1){
+                if(Variable.getIs_act_panel() == 1 && !Variable.is_start_insertion()){
                     System.out.println('\t' + "Start Insertion sort...");
+
+                    Variable.setIs_start_insertion(true);
 
                     Insertion_sort_panel insertion_sort_panel = new Insertion_sort_panel();
                     try {
@@ -224,8 +251,10 @@ public class General_Form extends JFrame implements Runnable {
                         e1.printStackTrace();
                     }
                 }
-                if(Variable.getIs_act_panel() == 2){
+                if(Variable.getIs_act_panel() == 2 && !Variable.is_start_merge()){
                     System.out.println('\t' + "Start Merge sort...");
+
+                    Variable.setIs_start_merge(true);
 
                     Merge_sort_panel merge_sort_panel = new Merge_sort_panel();
                     try {
@@ -234,8 +263,10 @@ public class General_Form extends JFrame implements Runnable {
                         e1.printStackTrace();
                     }
                 }
-                if(Variable.getIs_act_panel() == 3){
+                if(Variable.getIs_act_panel() == 3 && !Variable.is_start_quick()){
                     System.out.println('\t' + "Start Quick sort...");
+
+                    Variable.setIs_start_quick(true);
 
                     Quick_sort_panel quick_sort_panel = new Quick_sort_panel();
                     try {
@@ -250,12 +281,17 @@ public class General_Form extends JFrame implements Runnable {
             if(source == buttonStop ){
                 System.out.println("Press buttonStop");
 
-                if(Variable.getIndex_of_delay() != 7) {
-                    Variable.setIndex_of_delay_buf(Variable.getIndex_of_delay());
-                    Variable.setIndex_of_delay(7);
-                }
-                else
-                    Variable.setIndex_of_delay(Variable.getIndex_of_delay_buf());
+                if(Variable.getIs_act_panel() == 0 && Variable.is_start_bubble())
+                    Variable.setShouldQuitBubble(!Variable.isShouldQuitBubble());
+
+                if(Variable.getIs_act_panel() == 1 && Variable.is_start_insertion())
+                    Variable.setShouldQuitInsertion(!Variable.isShouldQuitInsertion());
+
+                if(Variable.getIs_act_panel() == 2 && Variable.is_start_merge())
+                    Variable.setShouldQuitMerge(!Variable.isShouldQuitMerge());
+
+                if(Variable.getIs_act_panel() == 3 && Variable.is_start_quick())
+                    Variable.setShouldQuitQuick(!Variable.isShouldQuitQuick());
             }
 
             if(source == buttonDelayDown){
@@ -286,29 +322,17 @@ public class General_Form extends JFrame implements Runnable {
             if(source == buttonRandomize){
                 System.out.println("Press buttonRandomize");
 
-                if(Variable.getIs_act_panel() == 0)
+                if(Variable.getIs_act_panel() == 0 && !Variable.is_start_bubble())
                     Random_sort.start_randomize_for_bubble();
 
-                if(Variable.getIs_act_panel() == 1)
+                if(Variable.getIs_act_panel() == 1 && !Variable.is_start_insertion())
                     Random_sort.start_randomize_for_insertion();
 
-                if(Variable.getIs_act_panel() == 2)
+                if(Variable.getIs_act_panel() == 2 && !Variable.is_start_merge())
                     Random_sort.start_randomize_for_merge();
 
-                if(Variable.getIs_act_panel() == 3)
+                if(Variable.getIs_act_panel() == 3 && !Variable.is_start_quick())
                     Random_sort.start_randomize_for_quick();
-            }
-
-        }
-    }
-    private class MyKey implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Object source = e.getSource();
-
-            if(source == input) {
-                Variable.setN(Integer.parseInt(input.getText()));
             }
 
         }

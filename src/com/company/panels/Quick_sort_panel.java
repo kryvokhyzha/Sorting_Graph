@@ -61,6 +61,11 @@ public class Quick_sort_panel extends JPanel implements Runnable {
             int i = start, j = end;
             int cur = i - (i - j) / 2;
             while (i < j) {
+
+                while (!Variable.isShouldQuitQuick()) {
+                    Thread.sleep(50);
+                }
+
                 while (i < cur && (array_for_quick[i] <= array_for_quick[cur])) {
                     i++;
                 }
@@ -68,6 +73,10 @@ public class Quick_sort_panel extends JPanel implements Runnable {
                     j--;
                 }
                 if (i < j) {
+
+                    while (!Variable.isShouldQuitQuick()) {
+                        Thread.sleep(50);
+                    }
 
                     Variable.setIndex_of_spaw_element_quick_general(i);
                     Variable.setIndex_of_spaw_element_quick_buf(j);
@@ -111,7 +120,13 @@ public class Quick_sort_panel extends JPanel implements Runnable {
                 int startIndex = 0;
                 int endIndex = array_for_quick.length - 1;
 
+                Variable.setStart_for_quick(System.currentTimeMillis());
+
                 doSort(startIndex, endIndex);
+
+                Variable.setFinish_for_quick(System.currentTimeMillis());
+
+            JOptionPane.showMessageDialog(null , "Время выполнения Quick sort: " + ( Variable.getFinish_for_quick() - Variable.getStart_for_quick() ) + " мс");
 
                 System.out.println("FINISH QUICK SORT !");
 
@@ -126,6 +141,8 @@ public class Quick_sort_panel extends JPanel implements Runnable {
                 thread.interrupt();
 
                 System.out.println();
+
+                Variable.setIs_start_quick(false);
         }
     }
 }

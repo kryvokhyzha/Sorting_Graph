@@ -5,6 +5,7 @@ import com.company.panels.Insertion_sort_panel;
 import com.company.panels.Merge_sort_panel;
 import com.company.panels.Quick_sort_panel;
 import com.company.variables.Constant;
+import com.company.variables.Variable;
 
 import java.awt.geom.Rectangle2D;
 
@@ -18,6 +19,7 @@ public class Random_sort {
     public static void start_randomize_for_bubble(){
         System.out.println('\n' + "Randomize array_for_bubble: ");
         System.out.print('\t');
+
         for (int i = 0; i < Constant.getN(); i++){
             array_for_bubble[i] = (int)(2 * (Constant.getN() - 1) * Math.random());
             System.out.print(array_for_bubble[i] + " ");
@@ -28,7 +30,7 @@ public class Random_sort {
         rectangle_array_for_bubble = new Rectangle2D[Constant.getN()];
 
         for(int i = 0; i < Constant.getN(); i++) {
-            rectangle_array_for_bubble[i] = new Rectangle2D.Double(100 + (Constant.getWidthBetweenRectangle() + Constant.getWidthOfRectangle()) * i, 500 - 4 * array_for_bubble[i], Constant.getWidthOfRectangle(), 4 * array_for_bubble[i]);
+            rectangle_array_for_bubble[i] = new Rectangle2D.Double(100 + (Constant.getWidthBetweenRectangle() + Constant.getWidthOfRectangle()) * i * Variable.getK(), 500 - 4 * array_for_bubble[i], Constant.getWidthOfRectangle(), 4 * array_for_bubble[i]);
         }
 
         Bubble_sort_panel bubble_sort_panel = new Bubble_sort_panel();

@@ -61,9 +61,16 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
         while (now_sort) {
             try {
 
+                Variable.setStart_for_bubble(System.currentTimeMillis());
+
                 for (int i = array_for_bubble.length - 1; i >= 0; i--) {
                     for (int j = 0; j < i; j++) {
                         if (array_for_bubble[j] > array_for_bubble[j + 1]) {
+
+                            while (!Variable.isShouldQuitBubble()) {
+                                Thread.sleep(50);
+                            }
+
                             Variable.setIndex_of_spaw_element_bubble(j);
 
                             repaint();
@@ -86,7 +93,9 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                     }
                 }
 
+                Variable.setFinish_for_bubble(System.currentTimeMillis());
 
+                JOptionPane.showMessageDialog(null , "Время выполнения Bubble sort: " + ( Variable.getFinish_for_bubble() - Variable.getStart_for_bubble() ) + " мс");
 
                 System.out.println("FINISH BUBBLE SORT !");
 
@@ -101,6 +110,8 @@ public class Bubble_sort_panel extends JPanel implements Runnable {
                 thread.interrupt();
 
                 System.out.println();
+
+                Variable.setIs_start_bubble(false);
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
